@@ -1,0 +1,178 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*aqui no root eu defino na raiz o tamanho refencial de 16px*/
+:root {
+  /*aqui no root eu defino a referencia de 16px para ser responsivo*/
+  font-size: 16px;
+}
+
+/*aqui estou puxando o webkit para mudar o tamanho geral da barra*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/*aqui estou puxando o webkit para mudar a cor da barra de rolagem*/
+::-webkit-scrollbar-track {
+background-color: #2c2c31;
+}
+
+/*aqui estou puxando o webkit para mudar a cor da barra que percorre a track*/
+::-webkit-scrollbar-thumb {
+  background-color: #9e9eA0;
+}
+
+/*aqui agente consegue colocar um keyframe de animação em algum lugar o nome entering é um nome opcional de tag*/
+@keyframes entering {
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+/*ao inves de porcentagem pode se usar (from>to)*/
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  background-color: #121215;
+  color: #eaeaea;
+
+/*aqui eu vou conseguir dividir meu corpo em dois*/
+  display: grid;
+  /*aqui estou dando o nome a duas areas*/
+  grid-template-areas: "profile timeline";
+  /*aqui etou dando 1 fração da pagina para os dois lados em partes iguais*/
+  grid-template-columns: 1fr 1fr;
+  /*aqui estou falando do tamanho da minha linha em vh100*/
+  grid-template-rows: 100vh;
+}
+nav {
+  padding: 64px;
+  /*está grid eu defini a area para timeline*/
+  grid-area: timeline;
+/*quando o conteudo não caber na vertical pode ativar a rolagem*/
+  overflow-y: scroll;
+  /*aqui puxa o @keyframe e aplica ao local desejado*/
+  animation: entering 0.7s ease-in-out;
+}
+
+.memory {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  text-decoration: none;
+  margin-bottom: 64px;
+}
+
+.memory small {
+  color: #BEBEBF;
+  /*aqui eu defino o tamanho da fonte dividido pelo tamanho referencial em root*/
+  font-size: 0.75rem;
+}
+
+.memory h1 {
+  /*aqui eu defino o tamanho da fonte dividido pelo tamanho referencial em root*/
+  font-size: 2rem;
+  color: #eaeaea;
+}
+
+.memory img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+/*quando passar o mouse em cima do elemento ele muda seu estado*/
+.memory:hover img {
+  transform: scale(1.1);
+}
+
+.memory div {
+  width: 100%;
+  height: 280px;
+  /*quando o conteudo não caber ele vai esconder*/
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.memory p {
+  color: #BEBEBF;
+  /*aqui eu defino o tamanho da fonte dividido pelo tamanho referencial em root*/
+  font-size: 1.2rem;
+  line-height: 28px;
+}
+
+aside {
+  grid-area: profile;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  border-right: 1px solid;
+  border-image: linear-gradient( #727275, #2c2c31) 1;
+
+  background-image: url(./assets/background.svg);
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+aside * {
+  animation: entering 0.7s ease-in-out;
+}
+
+aside img:nth-child(2) {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  border: 4px solid transparent;
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box,
+  linear-gradient(260deg,#d39e33, #ed5636, #633bbc ) border-box;
+}
+
+aside p {
+  /*aqui eu defino o tamanho da fonte dividido pelo tamanho referencial em root*/
+  font-size: 2rem;
+  text-align: center;
+}
+
+aside span {
+  /*aqui eu defino o tamanho da fonte dividido pelo tamanho referencial em root*/
+  font-size: 0.75rem;
+  color: #9e9eA0;
+}
+
+@media (max-width: 768px){
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0,2fr 0.8fr;
+    grid-template-areas:
+    "profile"
+    "timeline";
+  }
+      aside {
+      border-right: none;
+      padding: 32px 12px;
+    }
+
+    nav {
+      overflow-y: visible;
+      padding: 22px;
+    }
+}
